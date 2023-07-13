@@ -31,12 +31,12 @@ const TopBar = ({topClass}) => {
                                 <i className="fa fa-user" aria-hidden="true"></i> {('My account')}
                                 <ul className="onhover-show-div">
                                     <li>
-                                        <Link href={`/page/account/login`} >
+                                        <Link href={`/account/login`} >
                                             <a>Login</a>
                                         </Link>
                                     </li>
                                     <li>
-                                        <Link href={`/page/account/register`} >
+                                        <Link href={`/account/register`} >
                                             <a>Register</a>
                                         </Link>
                                     </li>
