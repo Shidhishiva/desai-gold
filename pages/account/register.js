@@ -1,5 +1,5 @@
 import React from 'react';
-import CommonLayout from '../../../components/shop/common-layout';
+import CommonLayout from '../../components/shop/common-layout';
 import { Input, Container, Row, Form, Label ,Col} from 'reactstrap';
 
 const Register = () => {
@@ -26,9 +26,17 @@ const Register = () => {
                                     </Row>
                                     <Row>
                                         <Col md="6">
+                                            <Label className="form-label" for="mobile">Mobile No</Label>
+                                            <Input type="text" className="form-control" id="fmobile" placeholder="Mobile Number"
+                                                required="" />
+                                        </Col>
+                                        <Col md="6">
                                             <Label className="form-label" for="email">email</Label>
                                             <Input type="email" className="form-control" id="email" placeholder="Email" required="" />
                                         </Col>
+                                    </Row>
+
+                                    <Row>
                                         <Col md="6">
                                             <Label className="form-label" for="review">Password</Label>
                                             <Input type="password" className="form-control" id="review"

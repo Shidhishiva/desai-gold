@@ -75,7 +75,7 @@ const HeaderOne = ({
 
   return (
     <div >
-      <header id="sticky" className={`sticky ${headerClass}`} style={{background:"#eee"}}>
+      <header id="sticky" className={`sticky ${headerClass}`} style={{background:"#FFDCE0"}}>
         <div className="mobile-fix-option"></div>
         {/*Top Header Component*/}
         {noTopBar ? "" : <TopBarDark topClass={topClass} />}
@@ -85,7 +85,7 @@ const HeaderOne = ({
             <Col>
               <div className="main-menu">
                 <div className="menu-left">
-                  <div className="navbar">
+                  {/*<div className="navbar">
                     <a href={null} onClick={openNav}>
                       <div className="bar-style">
                         <i
@@ -94,9 +94,8 @@ const HeaderOne = ({
                         ></i>
                       </div>
                     </a>
-                    {/*SideBar Navigation Component*/}
                     <SideBar />
-                  </div>
+                  </div>*/}
                   <div className="brand-logo">
                     <LogoImage logo={logoName} />
                   </div>
