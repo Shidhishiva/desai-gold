@@ -1,8 +1,11 @@
 import React from 'react';
 import CommonLayout from '../../components/shop/common-layout';
 import { Container, Row, Form, Label, Input, Col } from 'reactstrap';
+// import { providers, signIn, getSession, csrfToken } from "next-auth";
+import { signIn, getSession, getProviders } from "next-auth/react";
 
-const Login = () => {
+
+const Login = ({ providers,csrfToken }) => {
     return (
         <CommonLayout parent="home" title="login">
             <section className="login-page section-b-space">
@@ -21,6 +24,17 @@ const Login = () => {
                                         <Input type="password" className="form-control" id="review"
                                             placeholder="Enter your password" required="" />
                                     </div><a href="#" className="btn btn-solid">Login</a>
+                                    <br/>
+                                    {/*{Object.values(providers).map((provider) => {
+                                        return (
+                                          <div key={provider.name}>
+                                            <button className="btn btn-solid" onClick={() => signIn(provider.id)}>
+                                              Sign in with {provider.name}
+                                            </button>
+                                          </div>
+                                        );
+                                      })
+                                    }*/}
                                 </Form>
                             </div>
                         </Col>
@@ -34,10 +48,28 @@ const Login = () => {
                             </div>
                         </Col>
                     </Row>
+                     
                 </Container>
             </section>
         </CommonLayout>
     )
+}
+
+export async function getServerSideProps(context) {
+  const { query, req, res } = context;
+  var error = ''
+  if(Boolean(query.error)) {
+    error = query.error
+  }
+  
+  try {    
+    const secret = process.env.NEXTAUTH_SECRET
+    const token = await getToken({ req, secret })   
+    return { props: { providers: await getProviders(), loginError: error } };
+  } catch (e) {
+    return { props: { providers: await getProviders(), loginError: error } };
+  }
+  
 }
 
 export default Login;
