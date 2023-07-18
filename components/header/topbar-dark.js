@@ -2,6 +2,7 @@ import React from "react";
 import { Container, Row, Col } from "reactstrap";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import { useSession, signIn, signOut, getSession } from "next-auth/react"
 
 const TopBarDark = ({ topClass, fluid }) => {
   const router = useRouter();
@@ -46,7 +47,7 @@ const TopBarDark = ({ topClass, fluid }) => {
                       <a>Register</a>
                     </Link>
                   </li>
-                  <li onClick={() => firebaseLogout()}>
+                  <li onClick={() => signOut()}>
                     <a>Logout</a>
                   </li>
                 </ul>

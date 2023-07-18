@@ -29,8 +29,7 @@ export default function Page() {
                 <br/>
                 <br/>
                 <br/>
-                <h3 style={{textAlign:"center"}}>Welcome {session?.user?.name} to our website</h3>
-                <button onClick={() => signOut()}>Sign out</button>
+                <h3 style={{textAlign:"center"}}>Welcome {session?.user?.name} to Desai Gold</h3>
                 <br/>
                 <br/>
                 <br/>
