@@ -15,6 +15,7 @@ const Register = () => {
     } = useForm();
 
     const onSubmit = (data) => console.log(data);
+    
     return (
         <CommonLayout parent="home" title="register">
             <section className="register-page section-b-space">
@@ -52,7 +53,7 @@ const Register = () => {
                                                 placeholder="Enter your password" required/>
                                         </Col>
                                         <Col md="12">
-                                            <input href="#" type="submit" className="btn btn-solid w-auto"/>
+                                            <input href="#" value="REGISTER" type="submit" className="btn btn-solid w-auto"/>
                                         </Col>
                                     </Row>
                                 </Form>

@@ -1,4 +1,4 @@
-import { useSession, signIn, signOut } from "next-auth/react"
+import { useSession, signIn, signOut, getSession } from "next-auth/react"
 import {Helmet} from "react-helmet";
 import React from "react";
 // 
@@ -29,7 +29,7 @@ export default function Page() {
                 <br/>
                 <br/>
                 <br/>
-
+                <h3 style={{textAlign:"center"}}>Welcome {session?.user?.name} to our website</h3>
                 <button onClick={() => signOut()}>Sign out</button>
                 <br/>
                 <br/>
@@ -71,8 +71,7 @@ export default function Page() {
                 <br/>
                 <br/>
                 <br/>
-                      <button onClick={() => signIn()}>Sign in</button>
-                <h3>Not Signed in</h3>
+                <h3 style={{textAlign:"center"}}>Not Signed in</h3>
                 <br/>
                 <br/>
                 <br/>
@@ -98,3 +97,15 @@ export default function Page() {
         );
     }
 }
+
+export const getServerSideProps = async (context) => {
+  const session = await getSession({ req: context.req });
+  if (session) {
+    return {
+        props:{}
+    };
+  }
+  return {
+    props: { session },
+  };
+};

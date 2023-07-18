@@ -1,11 +1,32 @@
-import React from 'react';
+import React, { Dispatch, SetStateAction, useState }  from 'react';
 import CommonLayout from '../../components/shop/common-layout';
 import { Container, Row, Form, Label, Input, Col } from 'reactstrap';
 // import { providers, signIn, getSession, csrfToken } from "next-auth";
 import { signIn, getSession, getProviders } from "next-auth/react";
-
+import { useRouter } from 'next/router';
 
 const Login = ({ providers,csrfToken }) => {
+
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const router = useRouter();
+    
+    const handleSignIn = async (e) => {
+        e.preventDefault();
+
+        console.log('Email: ', email);
+        await signIn('credentials', {
+          redirect: false,
+          email,
+          password,
+        }).then((response) => {
+            console.log(response);
+            router.replace('/');
+        })
+          .catch((error) => {
+            console.log(error);
+          });
+    };
     return (
         <CommonLayout parent="home" title="login">
             <section className="login-page section-b-space">
@@ -14,27 +35,19 @@ const Login = ({ providers,csrfToken }) => {
                         <Col lg="6">
                             <h3>Login</h3>
                             <div className="theme-card">
-                                <Form className="theme-form">
+                                <Form className="theme-form"  onSubmit={handleSignIn}>
                                     <div className="form-group">
                                         <Label className="form-label" for="email">Email</Label>
-                                        <Input type="text" className="form-control" id="email" placeholder="Email" required="" />
+                                        <Input onChange={(e) => setEmail(e.target.value)} value={email}  type="text" className="form-control" id="email" placeholder="Email" required="" />
                                     </div>
                                     <div className="form-group">
                                         <Label className="form-label" for="review">Password</Label>
-                                        <Input type="password" className="form-control" id="review"
+                                        <Input value={password} onChange={(e) => setPassword(e.target.value)} type="password" className="form-control" id="review"
                                             placeholder="Enter your password" required="" />
-                                    </div><a href="#" className="btn btn-solid">Login</a>
+                                    </div>
+                                    <Input type="submit" className="btn btn-solid" style={{width:"150px"}} value="LOGIN" />
                                     <br/>
-                                    {/*{Object.values(providers).map((provider) => {
-                                        return (
-                                          <div key={provider.name}>
-                                            <button className="btn btn-solid" onClick={() => signIn(provider.id)}>
-                                              Sign in with {provider.name}
-                                            </button>
-                                          </div>
-                                        );
-                                      })
-                                    }*/}
+                                    
                                 </Form>
                             </div>
                         </Col>
@@ -48,7 +61,6 @@ const Login = ({ providers,csrfToken }) => {
                             </div>
                         </Col>
                     </Row>
-                     
                 </Container>
             </section>
         </CommonLayout>
@@ -67,6 +79,7 @@ export async function getServerSideProps(context) {
     const token = await getToken({ req, secret })   
     return { props: { providers: await getProviders(), loginError: error } };
   } catch (e) {
+
     return { props: { providers: await getProviders(), loginError: error } };
   }
   
